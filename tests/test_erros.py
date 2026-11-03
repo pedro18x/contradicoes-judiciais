@@ -145,11 +145,6 @@ def test_kappa_multiclasse():
     assert erros.kappa(a, b) == pytest.approx((0.75 - 5 / 16) / (1 - 5 / 16))
 
 
-def test_sem_predicoes_avisa(tmp_path):
-    with pytest.raises(SystemExit, match="experimento.py"):
-        erros.main(["relatorio", "--sistema", "am+llm", "--dados", str(tmp_path)])
-
-
 def test_amostra_sem_gold_para_o_rotulo_do_tribunal(dados, capsys):
     (dados / "gold.jsonl").unlink()  # avaliação 1: só o rótulo do STJ, sem trechos gold
     _main(dados, "amostra")

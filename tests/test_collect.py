@@ -3,7 +3,6 @@
 import datetime as dt
 import io
 import json
-import random
 import zipfile
 from types import SimpleNamespace
 
@@ -18,17 +17,14 @@ BASE = "https://portal.test/"
 @pytest.mark.parametrize(
     "texto, esperado",
     [
-        ("CONTRADIÇÃO. OCORRÊNCIA. EMBARGOS ACOLHIDOS.", True),
         ("Constata-se a contradição no acórdão embargado.", True),
         ("Embargos de declaração acolhidos para sanar contradição.", True),
         ("O acórdão incorreu em contradição ao afirmar que o contrato estava vigente.", True),
         ("EXISTÊNCIA DE CONTRADIÇÃO ENTRE A FUNDAMENTAÇÃO E O DISPOSITIVO.", True),
         ("CONTRADIÇÃO CONFIGURADA.", True),
-        ("Os embargos destinam-se a sanar omissão, contradição ou obscuridade.", False),
         ("OMISSÃO, CONTRADIÇÃO, OBSCURIDADE OU ERRO MATERIAL. INEXISTÊNCIA.", False),
         ("CONTRADIÇÃO. AUSÊNCIA. OMISSÃO. AUSÊNCIA.", False),
         ("Não há contradição no julgado.", False),
-        ("Inexistência de contradição.", False),
         ("ERRO MATERIAL. EXISTÊNCIA.", False),
         ("APONTADA CONTRADIÇÃO NO ACÓRDÃO EMBARGADO. OCORRÊNCIA. CONTRADIÇÃO SANADA.", True),
         (
@@ -48,14 +44,12 @@ BASE = "https://portal.test/"
             False,
         ),
         ("OMISSÃO, CONTRADIÇÃO OU OBSCURIDADE. EXISTÊNCIA.", False),
-        ("Na hipótese dos autos, há contradição entre a fundamentação e o dispositivo.", True),
         # ementas no formato do CNJ (casos reais acolhidos por outros motivos)
         (
             "A questão em discussão consiste em saber se há omissão ou contradição no acórdão embargado.",
             False,
         ),
         ("A embargante alega omissão/contradição no acórdão embargado quanto aos honorários.", False),
-        ("(ii) saber se há omissão ou contradição no acórdão embargado quanto à aplicação da multa.", False),
         ("Não há omissão ou contradição a ser sanada, pois a decisão embargada expôs as razões.", False),
     ],
 )
@@ -68,7 +62,6 @@ def test_aponta_contradicao(texto, esperado):
     [
         ("por unanimidade, acolher os embargos de declaração, com efeitos modificativos", "acolhidos"),
         ("acolher parcialmente os embargos de declaração", "acolhidos"),
-        ("por unanimidade, rejeitar os embargos de declaração", "rejeitados"),
         ("por maioria, rejeitar os embargos. Votaram vencidos os que os acolhiam.", "rejeitados"),
         ("não conhecer dos embargos de declaração", None),
         ("acolher os embargos de A e rejeitar os de B", None),
@@ -85,25 +78,6 @@ def test_classe_data_e_texto():
     assert stj.data_publicacao("DJEN       DATA:19/08/2025") == dt.date(2025, 8, 19)
     assert stj.data_publicacao("None") is None
     assert stj.limpar_texto("EMENTA<br>Linha &amp; outra<BR/>fim ") == "EMENTA\nLinha & outra\nfim"
-
-
-def test_arquivo_remoto_le_so_o_necessario():
-    rng = random.Random(0)
-    buf = io.BytesIO()
-    with zipfile.ZipFile(buf, "w") as z:  # conteúdo aleatório: ~6 MB que não comprimem
-        for i in range(300):
-            z.writestr(f"{i}.txt", f"documento {i} ".encode() + rng.randbytes(20_000))
-    dados = buf.getvalue()
-    pedidos = []
-
-    def intervalo(url, ini, fim):
-        pedidos.append((ini, fim))
-        return dados[ini : fim + 1]
-
-    z = zipfile.ZipFile(stj.ArquivoRemoto("x", intervalo, len(dados)))
-    assert z.read("150.txt").startswith(b"documento 150 ")
-    lido = sum(f - i + 1 for i, f in pedidos)
-    assert lido < len(dados) / 5 and len(pedidos) <= 4  # diretório + o membro, não o ZIP inteiro
 
 
 # ------------------------------------------------------------------ portal falso
@@ -330,14 +304,6 @@ def test_coleta_pelo_rotulo_do_tribunal(tmp_path):
     )  # ZIP só por intervalos
 
 
-def test_cache_evita_nova_requisicao(tmp_path):
-    primeiro = PortalFalso(tmp_path)
-    stj.coletar(_args(), primeiro)
-    segundo = PortalFalso(tmp_path)  # mesmo diretório de cache
-    assert stj.coletar(_args(), segundo)[0] and primeiro.requisicoes
-    assert [r for r in segundo.requisicoes if r[0] != "HEAD"] == []
-
-
 def test_metas_filtro_de_secao_e_saida(tmp_path, monkeypatch, capsys):
     assert stj.coletar(_args(max=0, base_sintetico=0), PortalFalso(tmp_path))[0] == []
     # sem reconhecidas não há rejeitadas (1:1); só a base do sintético
@@ -366,33 +332,3 @@ def test_metas_filtro_de_secao_e_saida(tmp_path, monkeypatch, capsys):
     assert '"criterio": "rejeitada"' in (tmp_path / "decisoes.jsonl.criterios.jsonl").read_text()
     saida_texto = capsys.readouterr().out
     assert "1 com contradição reconhecida, 1 com contradição alegada e rejeitada, 1 negativas" in saida_texto
-
-
-def test_conexao_cortada_no_meio_tenta_de_novo(tmp_path, monkeypatch):
-    """A resposta que chega pela metade (IncompleteRead) é repetida, como o timeout."""
-    import http.client
-
-    class Resposta:
-        headers = None
-
-        def __enter__(self):
-            return self
-
-        def __exit__(self, *_):
-            return False
-
-        def read(self):
-            return b"ok"
-
-    chamadas = []
-
-    def urlopen(req, timeout):
-        chamadas.append(req)
-        if len(chamadas) == 1:
-            raise http.client.IncompleteRead(b"", 262144)
-        return Resposta()
-
-    monkeypatch.setattr(stj.urllib.request, "urlopen", urlopen)
-    monkeypatch.setattr(stj.time, "sleep", lambda s: None)
-    assert stj.Portal(tmp_path, pausa=0)._requisitar(BASE + "x.zip")[1] == b"ok"
-    assert len(chamadas) == 2

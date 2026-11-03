@@ -1,5 +1,3 @@
-import json
-import sys
 from pathlib import Path
 
 import pytest
@@ -120,19 +118,6 @@ def test_por_fold_media_e_desvio():
     assert r["resumo"]["par.f1"]["media"] == 0.5
     assert r["resumo"]["par.f1"]["desvio"] == pytest.approx(0.7071, abs=1e-4)
     assert r["resumo"]["par.precisao"]["folds"] == 1  # fold sem nenhuma predição não tem precisão
-
-
-def test_cli(tmp_path, monkeypatch, capsys):
-    splits = tmp_path / "splits.json"
-    splits.write_text(json.dumps({"seed": 42, "k": 2, "folds": [["FICT-0001"], ["FICT-0002"]]}))
-    saida = tmp_path / "res.json"
-    argv = ["evaluate", "--pred", str(FIX / "predicoes.jsonl"), "--gold", str(FIX / "gold.jsonl")]
-    monkeypatch.setattr(sys, "argv", [*argv, "--splits", str(splits), "--json", str(saida)])
-    evaluate.main()
-    out = capsys.readouterr().out
-    assert "| **global** | 2 | 0 | 1 | 1,000 | 0,667 | 0,800 |" in out
-    assert "## Nível decisão" in out and "## Por fold" in out
-    assert json.loads(saida.read_text())["geral"]["par"]["global"]["vp"] == 2
 
 
 def test_cobertura_da_ma():

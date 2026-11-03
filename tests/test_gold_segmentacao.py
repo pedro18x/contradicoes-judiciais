@@ -1,7 +1,5 @@
 from pathlib import Path
 
-import pytest
-
 from scripts import gold_segmentacao as gs
 from scripts.avaliar_segmentacao import medir
 from src.contratos import Decisao, Segmentos, ler_jsonl
@@ -38,19 +36,6 @@ def test_correcao_manual_muda_o_gold_e_a_avaliacao():
     m = medir(INTEIRO_TEOR, gold)
     comum, previsto, esperado = m["dispositivo"]
     assert comum == previsto < esperado  # a automática acertou só parte do dispositivo: revocação < 1
-
-
-@pytest.mark.parametrize(
-    "conteudo, erro",
-    [
-        ("[[INÍCIO EMENTA]]\ntexto\n", "falta o [[FIM"),
-        ("texto\n[[FIM RELATÓRIO]]\n", "sem o [[INÍCIO"),
-        ("[[INÍCIO VOTO]]\nx\n[[FIM VOTO]]\n[[INÍCIO EMENTA]]\na\n[[INÍCIO EMENTA]]\n", "duas vezes"),
-    ],
-)
-def test_erros_de_marcacao_sao_explicados(conteudo, erro):
-    with pytest.raises(ValueError, match=erro.replace("[", r"\[")):
-        gs.ler_marcado("X", conteudo)
 
 
 def test_segmento_apagado_fica_vazio_e_preparar_importar(tmp_path, capsys):

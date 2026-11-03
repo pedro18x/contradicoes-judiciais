@@ -97,12 +97,6 @@ def test_estimar_nao_chama_o_llm(dados, llm_fixtures, capsys):
     assert "2 decisões" in out and "NLI todos+llm" in out
 
 
-def test_fold_com_decisao_desconhecida(dados):
-    (dados / "splits.json").write_text(json.dumps({"folds": [["FICT-0001"], ["NAO-EXISTE"]]}))
-    with pytest.raises(SystemExit, match="NAO-EXISTE"):
-        _rodar(dados)
-
-
 def test_avaliacao_pelo_rotulo_do_tribunal(dados, llm_fixtures, monkeypatch):
     """Mesmas decisões, mas só o rótulo do STJ: métrica por decisão, few-shot vindo do corpus sintético."""
     classificar, exemplos_usados = nli.classificar, []

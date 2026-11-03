@@ -124,7 +124,7 @@ class ContradicaoGold(BaseModel):
 
 
 class Gold(BaseModel):
-    """Anotação de referência (consenso dos anotadores). Lista vazia = sem contradição."""
+    """Gabarito de uma decisão: as contradições de referência. Lista vazia = sem contradição."""
 
     id: str
     contradicoes: list[ContradicaoGold]

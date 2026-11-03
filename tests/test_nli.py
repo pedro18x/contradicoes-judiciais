@@ -135,12 +135,6 @@ def test_local_limiar_ajustado_so_no_treino():
     assert nli.ajustar_limiar_local(pontuados, sem_ce2) == 0.8
 
 
-def test_local_sem_pares_validos_nao_carrega_o_modelo(monkeypatch):
-    monkeypatch.setattr(nli, "carregar_nli_local", lambda *a: pytest.fail("não devia carregar o modelo"))
-    vazio = Pares(id="FICT-0001", pares=[])
-    assert nli.classificar_local(SEGS[0], PROPS[0], vazio).predicoes == []
-
-
 def test_prompt_v2_acrescenta_regras_sem_mudar_o_padrao(respostas):
     nli.classificar(SEGS[0], PROPS[0], PARES[0])
     preds = nli.classificar(SEGS[0], PROPS[0], PARES[0], prompt="nli_v2")

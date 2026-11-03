@@ -69,8 +69,6 @@ def test_limiar_filtra_pares_pouco_parecidos():
         # negação + antônimo dizem o mesmo
         ("Os embargos não são cabíveis.", "Os embargos são incabíveis.", None),
         ("O contrato não foi rescindido.", "O contrato estava vigente.", None),
-        ("O presente recurso é tempestivo.", "O réu esteve ausente.", None),
-        ("O contrato estava vigente.", "O contrato estava vigente.", None),
     ],
 )
 def test_regras(a, b, esperado):

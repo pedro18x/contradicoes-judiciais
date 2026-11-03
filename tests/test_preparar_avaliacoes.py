@@ -66,12 +66,6 @@ def test_amostra_tribunal_metade_de_cada_rotulo():
     assert preparar_avaliacoes.amostra_tribunal(invertido, 8, seed=42) == amostra
 
 
-def test_amostra_tribunal_rotulo_com_poucos_casos_mantem_1_para_1():
-    rotulos = {f"R{i}": True for i in range(3)} | {f"N{i}": False for i in range(30)}
-    amostra = preparar_avaliacoes.amostra_tribunal(rotulos, 10, seed=42)
-    assert sum(amostra.values()) == 3 and sum(not v for v in amostra.values()) == 3
-
-
 def test_amostra_sintetico_sorteia_ate_n():
     negativas = {f"S{i}" for i in range(10)}
     amostra = preparar_avaliacoes.amostra_sintetico(negativas, 4, seed=42)

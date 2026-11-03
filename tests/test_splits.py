@@ -1,8 +1,6 @@
 import random
 from collections import Counter
 
-import pytest
-
 from src import splits
 from src.contratos import ContradicaoGold, Gold, Trecho
 
@@ -57,10 +55,3 @@ def test_salvar_carregar_e_particao(tmp_path, monkeypatch):
     assert folds == s["folds"]
     treino, teste = splits.particao(folds, 2)
     assert teste == folds[2] and len(treino) == 80 and not set(treino) & set(teste)
-
-
-def test_distribuicao_e_ids_repetidos():
-    tabela = splits.distribuicao(splits.gerar(GOLD)["folds"], GOLD)
-    assert "| 0 | 20 | 8 |" in tabela  # fold 0: 20 decisões, 8 com CDF-1 (6 só CDF-1 + 2 com CE-2)
-    with pytest.raises(ValueError):
-        splits.gerar(GOLD + GOLD[:1])

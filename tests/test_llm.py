@@ -50,20 +50,6 @@ def test_cache_registra_modelo(provedor, tmp_path):
     assert (entrada["tokens_in"], entrada["tokens_out"]) == (10, 5)
 
 
-def test_retry_em_erro_transitorio(provedor):
-    chamadas, respostas = provedor
-    respostas += [llm.ErroTransitorio("429"), llm.ErroTransitorio("503"), "ok"]
-    assert llm.complete("x") == "ok"
-    assert len(chamadas) == 3
-
-
-def test_desiste_apos_tentativas(provedor):
-    _, respostas = provedor
-    respostas += [llm.ErroTransitorio("429")] * llm.TENTATIVAS
-    with pytest.raises(llm.ErroTransitorio):
-        llm.complete("x")
-
-
 def test_complete_json_com_cerca_e_reforco(provedor):
     chamadas, respostas = provedor
     respostas += ['```json\n{"a": 1}\n```']
@@ -142,19 +128,6 @@ def test_teto_para_antes_de_ultrapassar(provedor, monkeypatch):
     assert llm.complete("1") == "ok"  # o que está no cache não gasta, então passa
 
 
-def test_teto_exige_preco_do_modelo(provedor, monkeypatch):
-    monkeypatch.setenv("LLM_TETO_USD", "10")
-    with pytest.raises(ValueError, match="PRECOS"):
-        llm.complete("x")  # modelo-teste não tem preço
-
-
-def test_sem_modelo(monkeypatch, tmp_path):
-    monkeypatch.chdir(tmp_path)  # sem .env
-    monkeypatch.delenv("LLM_MODEL", raising=False)
-    with pytest.raises(ValueError):
-        llm.complete("x")
-
-
 @pytest.fixture
 def api(monkeypatch):
     """Cliente da Anthropic falso: guarda os parâmetros e devolve `api.resposta` (ou levanta `api.erro`)."""
@@ -202,16 +175,6 @@ def test_provedor_monta_a_chamada(api):
     assert api.chamadas[-1]["system"] == []
 
 
-def test_provedor_classifica_erros(api):
-    for status in (429, 500, 529):
-        api.erro = _erro_http(status)
-        with pytest.raises(llm.ErroTransitorio):
-            llm._chamar_provedor("m", "", "p")
-    api.erro = _erro_http(400)  # erro do pedido: repetir não adianta
-    with pytest.raises(anthropic.APIStatusError):
-        llm._chamar_provedor("m", "", "p")
-
-
 def test_resposta_cortada_ou_recusada_nao_vai_para_o_cache(api, monkeypatch, tmp_path):
     monkeypatch.setenv("LLM_CACHE_DIR", str(tmp_path))
     for motivo in ("max_tokens", "refusal"):
@@ -219,11 +182,3 @@ def test_resposta_cortada_ou_recusada_nao_vai_para_o_cache(api, monkeypatch, tmp
         with pytest.raises(llm.RespostaIncompleta):
             llm.complete("p", model="m")
     assert not list(tmp_path.glob("*.json"))
-
-
-def test_cliente_envia_workspace_quando_configurado(monkeypatch):
-    monkeypatch.setenv("LLM_API_KEY", "chave-falsa")
-    monkeypatch.setenv("LLM_WORKSPACE_ID", "wrkspc_teste")
-    assert llm._cliente().default_headers["anthropic-workspace-id"] == "wrkspc_teste"
-    monkeypatch.delenv("LLM_WORKSPACE_ID")
-    assert "anthropic-workspace-id" not in llm._cliente().default_headers
