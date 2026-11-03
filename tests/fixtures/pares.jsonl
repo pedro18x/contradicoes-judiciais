@@ -1,0 +1,2 @@
+{"id":"FICT-0001","pares":[{"par":["p2","p4"],"relacao":"premissa-conclusao","origem":"am"},{"par":["p3","p4"],"relacao":"premissa-conclusao","origem":"am"},{"par":["p5","p2"],"relacao":"premissa-premissa","origem":"am"},{"par":["p4","p6"],"relacao":"conclusao-dispositivo","origem":"am"},{"par":["p1","p6"],"relacao":"ementa-dispositivo","origem":"am"}]}
+{"id":"FICT-0002","pares":[{"par":["p1","p2"],"relacao":"premissa-conclusao","origem":"am"},{"par":["p2","p3"],"relacao":"conclusao-dispositivo","origem":"am"}]}

@@ -1,0 +1,22 @@
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+*.egg-info/
+.pytest_cache/
+.ruff_cache/
+
+# Segredos
+.env
+
+# Dados (acórdãos têm nomes de partes: LGPD) e cache de LLM
+data/
+.cache/
+*.pdf
+
+# Editores / SO
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db

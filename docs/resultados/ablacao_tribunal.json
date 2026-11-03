@@ -1,0 +1,477 @@
+{
+ "avaliacao": "tribunal",
+ "decisoes": 200,
+ "k": 5,
+ "sistemas": {
+  "baseline": {
+   "geral": {
+    "decisoes": 200,
+    "decisao": {
+     "vp": 95,
+     "fp": 100,
+     "fn": 5,
+     "precisao": 0.48717948717948717,
+     "revocacao": 0.95,
+     "f1": 0.6440677966101694,
+     "vn": 0,
+     "acuracia": 0.475
+    }
+   },
+   "por_fold": {
+    "folds": [
+     {
+      "decisoes": 40,
+      "decisao": {
+       "vp": 20,
+       "fp": 20,
+       "fn": 0,
+       "precisao": 0.5,
+       "revocacao": 1.0,
+       "f1": 0.6666666666666666,
+       "vn": 0,
+       "acuracia": 0.5
+      }
+     },
+     {
+      "decisoes": 40,
+      "decisao": {
+       "vp": 18,
+       "fp": 20,
+       "fn": 2,
+       "precisao": 0.47368421052631576,
+       "revocacao": 0.9,
+       "f1": 0.6206896551724138,
+       "vn": 0,
+       "acuracia": 0.45
+      }
+     },
+     {
+      "decisoes": 40,
+      "decisao": {
+       "vp": 20,
+       "fp": 20,
+       "fn": 0,
+       "precisao": 0.5,
+       "revocacao": 1.0,
+       "f1": 0.6666666666666666,
+       "vn": 0,
+       "acuracia": 0.5
+      }
+     },
+     {
+      "decisoes": 40,
+      "decisao": {
+       "vp": 20,
+       "fp": 20,
+       "fn": 0,
+       "precisao": 0.5,
+       "revocacao": 1.0,
+       "f1": 0.6666666666666666,
+       "vn": 0,
+       "acuracia": 0.5
+      }
+     },
+     {
+      "decisoes": 40,
+      "decisao": {
+       "vp": 17,
+       "fp": 20,
+       "fn": 3,
+       "precisao": 0.4594594594594595,
+       "revocacao": 0.85,
+       "f1": 0.5964912280701754,
+       "vn": 0,
+       "acuracia": 0.425
+      }
+     }
+    ],
+    "resumo": {
+     "decisao.precisao": {
+      "media": 0.48662873399715506,
+      "desvio": 0.018987511885106834,
+      "folds": 5
+     },
+     "decisao.revocacao": {
+      "media": 0.95,
+      "desvio": 0.07071067811865475,
+      "folds": 5
+     },
+     "decisao.f1": {
+      "media": 0.6434361766485178,
+      "desvio": 0.03294009500493285,
+      "folds": 5
+     },
+     "decisao.acuracia": {
+      "media": 0.475,
+      "desvio": 0.035355339059327376,
+      "folds": 5
+     }
+    }
+   }
+  },
+  "todos+llm": {
+   "geral": {
+    "decisoes": 200,
+    "decisao": {
+     "vp": 16,
+     "fp": 2,
+     "fn": 84,
+     "precisao": 0.8888888888888888,
+     "revocacao": 0.16,
+     "f1": 0.27118644067796616,
+     "vn": 98,
+     "acuracia": 0.57
+    }
+   },
+   "por_fold": {
+    "folds": [
+     {
+      "decisoes": 40,
+      "decisao": {
+       "vp": 2,
+       "fp": 1,
+       "fn": 18,
+       "precisao": 0.6666666666666666,
+       "revocacao": 0.1,
+       "f1": 0.1739130434782609,
+       "vn": 19,
+       "acuracia": 0.525
+      }
+     },
+     {
+      "decisoes": 40,
+      "decisao": {
+       "vp": 3,
+       "fp": 0,
+       "fn": 17,
+       "precisao": 1.0,
+       "revocacao": 0.15,
+       "f1": 0.2608695652173913,
+       "vn": 20,
+       "acuracia": 0.575
+      }
+     },
+     {
+      "decisoes": 40,
+      "decisao": {
+       "vp": 1,
+       "fp": 0,
+       "fn": 19,
+       "precisao": 1.0,
+       "revocacao": 0.05,
+       "f1": 0.09523809523809523,
+       "vn": 20,
+       "acuracia": 0.525
+      }
+     },
+     {
+      "decisoes": 40,
+      "decisao": {
+       "vp": 4,
+       "fp": 0,
+       "fn": 16,
+       "precisao": 1.0,
+       "revocacao": 0.2,
+       "f1": 0.33333333333333337,
+       "vn": 20,
+       "acuracia": 0.6
+      }
+     },
+     {
+      "decisoes": 40,
+      "decisao": {
+       "vp": 6,
+       "fp": 1,
+       "fn": 14,
+       "precisao": 0.8571428571428571,
+       "revocacao": 0.3,
+       "f1": 0.4444444444444444,
+       "vn": 19,
+       "acuracia": 0.625
+      }
+     }
+    ],
+    "resumo": {
+     "decisao.precisao": {
+      "media": 0.9047619047619048,
+      "desvio": 0.14677176197545183,
+      "folds": 5
+     },
+     "decisao.revocacao": {
+      "media": 0.16,
+      "desvio": 0.09617692030835671,
+      "folds": 5
+     },
+     "decisao.f1": {
+      "media": 0.261559696342305,
+      "desvio": 0.13596283783483873,
+      "folds": 5
+     },
+     "decisao.acuracia": {
+      "media": 0.57,
+      "desvio": 0.04472135954999578,
+      "folds": 5
+     }
+    }
+   }
+  },
+  "am+llm": {
+   "geral": {
+    "decisoes": 200,
+    "decisao": {
+     "vp": 25,
+     "fp": 16,
+     "fn": 75,
+     "precisao": 0.6097560975609756,
+     "revocacao": 0.25,
+     "f1": 0.3546099290780142,
+     "vn": 84,
+     "acuracia": 0.545
+    }
+   },
+   "por_fold": {
+    "folds": [
+     {
+      "decisoes": 40,
+      "decisao": {
+       "vp": 4,
+       "fp": 3,
+       "fn": 16,
+       "precisao": 0.5714285714285714,
+       "revocacao": 0.2,
+       "f1": 0.29629629629629634,
+       "vn": 17,
+       "acuracia": 0.525
+      }
+     },
+     {
+      "decisoes": 40,
+      "decisao": {
+       "vp": 5,
+       "fp": 3,
+       "fn": 15,
+       "precisao": 0.625,
+       "revocacao": 0.25,
+       "f1": 0.35714285714285715,
+       "vn": 17,
+       "acuracia": 0.55
+      }
+     },
+     {
+      "decisoes": 40,
+      "decisao": {
+       "vp": 4,
+       "fp": 2,
+       "fn": 16,
+       "precisao": 0.6666666666666666,
+       "revocacao": 0.2,
+       "f1": 0.30769230769230765,
+       "vn": 18,
+       "acuracia": 0.55
+      }
+     },
+     {
+      "decisoes": 40,
+      "decisao": {
+       "vp": 7,
+       "fp": 2,
+       "fn": 13,
+       "precisao": 0.7777777777777778,
+       "revocacao": 0.35,
+       "f1": 0.48275862068965514,
+       "vn": 18,
+       "acuracia": 0.625
+      }
+     },
+     {
+      "decisoes": 40,
+      "decisao": {
+       "vp": 5,
+       "fp": 6,
+       "fn": 15,
+       "precisao": 0.45454545454545453,
+       "revocacao": 0.25,
+       "f1": 0.3225806451612903,
+       "vn": 14,
+       "acuracia": 0.475
+      }
+     }
+    ],
+    "resumo": {
+     "decisao.precisao": {
+      "media": 0.6190836940836941,
+      "desvio": 0.11919185913963458,
+      "folds": 5
+     },
+     "decisao.revocacao": {
+      "media": 0.25,
+      "desvio": 0.061237243569579436,
+      "folds": 5
+     },
+     "decisao.f1": {
+      "media": 0.3532941453964813,
+      "desvio": 0.07590695693707171,
+      "folds": 5
+     },
+     "decisao.acuracia": {
+      "media": 0.545,
+      "desvio": 0.054198708471697006,
+      "folds": 5
+     }
+    }
+   }
+  },
+  "am+nli-local": {
+   "geral": {
+    "decisoes": 200,
+    "decisao": {
+     "vp": 96,
+     "fp": 97,
+     "fn": 4,
+     "precisao": 0.49740932642487046,
+     "revocacao": 0.96,
+     "f1": 0.6552901023890785,
+     "vn": 3,
+     "acuracia": 0.495
+    }
+   },
+   "por_fold": {
+    "folds": [
+     {
+      "decisoes": 40,
+      "decisao": {
+       "vp": 20,
+       "fp": 20,
+       "fn": 0,
+       "precisao": 0.5,
+       "revocacao": 1.0,
+       "f1": 0.6666666666666666,
+       "vn": 0,
+       "acuracia": 0.5
+      }
+     },
+     {
+      "decisoes": 40,
+      "decisao": {
+       "vp": 18,
+       "fp": 19,
+       "fn": 2,
+       "precisao": 0.4864864864864865,
+       "revocacao": 0.9,
+       "f1": 0.631578947368421,
+       "vn": 1,
+       "acuracia": 0.475
+      }
+     },
+     {
+      "decisoes": 40,
+      "decisao": {
+       "vp": 20,
+       "fp": 20,
+       "fn": 0,
+       "precisao": 0.5,
+       "revocacao": 1.0,
+       "f1": 0.6666666666666666,
+       "vn": 0,
+       "acuracia": 0.5
+      }
+     },
+     {
+      "decisoes": 40,
+      "decisao": {
+       "vp": 20,
+       "fp": 20,
+       "fn": 0,
+       "precisao": 0.5,
+       "revocacao": 1.0,
+       "f1": 0.6666666666666666,
+       "vn": 0,
+       "acuracia": 0.5
+      }
+     },
+     {
+      "decisoes": 40,
+      "decisao": {
+       "vp": 18,
+       "fp": 18,
+       "fn": 2,
+       "precisao": 0.5,
+       "revocacao": 0.9,
+       "f1": 0.6428571428571429,
+       "vn": 2,
+       "acuracia": 0.5
+      }
+     }
+    ],
+    "resumo": {
+     "decisao.precisao": {
+      "media": 0.4972972972972973,
+      "desvio": 0.0060434269662156355,
+      "folds": 5
+     },
+     "decisao.revocacao": {
+      "media": 0.96,
+      "desvio": 0.0547722557505166,
+      "folds": 5
+     },
+     "decisao.f1": {
+      "media": 0.6548872180451127,
+      "desvio": 0.01661523713680923,
+      "folds": 5
+     },
+     "decisao.acuracia": {
+      "media": 0.495,
+      "desvio": 0.011180339887498959,
+      "folds": 5
+     }
+    }
+   }
+  }
+ },
+ "limiares": {
+  "baseline": [
+   0.65,
+   0.75,
+   0.65,
+   0.65,
+   0.8
+  ],
+  "am+nli-local": [
+   0.65,
+   0.95,
+   0.65,
+   0.65,
+   0.95
+  ]
+ },
+ "pares_classificados": {
+  "todos+llm": 9226,
+  "am+llm": 9226,
+  "am+nli-local": 9226
+ },
+ "positivos": 100,
+ "custo_llm": {
+  "chamadas": 7734,
+  "tokens_in": 33341443,
+  "tokens_out": 8429276,
+  "usd": 56.53874993999985,
+  "por_etapa": {
+   "nli": {
+    "claude-sonnet-5-5": {
+     "chamadas": 5197,
+     "tokens_in": 25690479,
+     "tokens_out": 3480601,
+     "usd": 53.55943319999992
+    }
+   },
+   "ma": {
+    "claude-haiku-5-5": {
+     "chamadas": 2537,
+     "tokens_in": 7650964,
+     "tokens_out": 4948675,
+     "usd": 2.9793167400000002
+    }
+   }
+  }
+ }
+}

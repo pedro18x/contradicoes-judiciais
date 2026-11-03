@@ -1,0 +1,32 @@
+[project]
+name = "contradicoes-judiciais"
+version = "1.0.0"
+description = "Detecção de contradições internas em acórdãos do STJ por Mineração de Argumentos e NLI"
+readme = "README.md"
+authors = [
+    { name = "Pedro Ernesto de A. K. Vogado" },
+    { name = "Rafael Andrade Mendes" },
+    { name = "Anna Carolina Campos de A. V." },
+]
+requires-python = ">=3.11"
+dependencies = ["pydantic>=2", "numpy", "anthropic>=1.17"]
+
+[project.optional-dependencies]
+dev = ["pytest", "ruff"]
+demo = ["streamlit", "pypdf"]
+baseline = ["sentence-transformers"]
+local = ["transformers", "torch", "sentencepiece", "protobuf"]
+
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools]
+packages = ["src"]
+
+[tool.pytest.ini_options]
+pythonpath = ["."]
+testpaths = ["tests"]
+
+[tool.ruff]
+line-length = 110

@@ -1,0 +1,31 @@
+# Pares de antônimos usados pelo baseline (src/baseline.py): um par por linha, separado por espaço.
+# Escreva no masculino singular; feminino e plural (válida, válidos, válidas) são gerados sozinhos.
+# Provido × improvido/desprovido e concedido × negado não entram aqui: improvido, desprovido e negado já
+# são marcadores de negação (NEGACOES em src/baseline.py), e a regra de polaridade cobre esses pares.
+procedente improcedente
+acolho rejeito
+acolhido rejeitado
+defiro indefiro
+deferido indeferido
+mantido reformado
+mantido cassado
+condeno absolvo
+condenado absolvido
+cabível incabível
+admissível inadmissível
+devido indevido
+válido inválido
+válido nulo
+vigente rescindido
+vigente extinto
+existente inexistente
+comprovado incomprovado
+lícito ilícito
+legal ilegal
+legítimo ilegítimo
+regular irregular
+tempestivo intempestivo
+competente incompetente
+adimplente inadimplente
+capaz incapaz
+culpado inocente
