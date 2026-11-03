@@ -90,7 +90,7 @@ As definições estão em [`src/evaluate.py`](src/evaluate.py).
 - Os números são a média e o desvio padrão entre as partições de teste. As contagens somadas de todas as partições também estão nos arquivos de resultado.
 - Exemplos *few-shot* do classificador: até 2 contradições por categoria. No sintético, são sorteadas só das decisões de treino de cada partição; no tribunal, vêm do conjunto sintético.
 - Limiares de A e D: escolhidos nas decisões de treino de cada partição, pelo maior F1 (por par no sintético, por decisão no tribunal).
-- **Revisão humana:** uma especialista em Direito revisou as contradições que C apontou numa amostra aleatória de 10% das decisões de teste do tribunal (20 decisões, *seed* 42). C apontou 19 contradições, em 5 dessas decisões. Cada uma foi avaliada como genuína, parcialmente válida ou incorreta, com o acórdão completo à disposição. O guia usado está em [`docs/GUIA_ANOTACAO.md`](docs/GUIA_ANOTACAO.md).
+- **Revisão humana:** uma especialista em Direito, inscrita na OAB, revisou as contradições que C apontou numa amostra aleatória de 10% das decisões de teste do tribunal (20 decisões, *seed* 42). C apontou 19 contradições, em 5 dessas decisões. Cada uma foi avaliada como genuína, parcialmente válida ou incorreta, com o acórdão completo à disposição. O guia usado está em [`docs/GUIA_ANOTACAO.md`](docs/GUIA_ANOTACAO.md).
 - **Segmentação:** medida por caractere contra uma marcação conferida à mão em 30 decisões e em outras 10 fora da amostra usada para corrigir as regras ([`docs/resultados/segmentacao.md`](docs/resultados/segmentacao.md)).
 
 ## Resultados
