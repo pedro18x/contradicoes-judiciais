@@ -297,7 +297,7 @@ artefatos/         dados publicáveis do corpus (sem textos)
 ## Como citar
 
 ```bibtex
-@misc{vogado2026contradicoes,
+@misc{contradicoesjudiciais2026,
   author       = {Pedro Ernesto de A. K. Vogado and Rafael Andrade Mendes and {Anna Carolina Campos de A. V.}},
   title        = {Detecção Automática de Contradições Internas em Decisões Judiciais por Mineração de Argumentos e Inferência de Linguagem Natural},
   howpublished = {Trabalho de Conclusão de Curso (Ciência da Computação), UNIPÊ, João Pessoa},
