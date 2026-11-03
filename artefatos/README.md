@@ -17,10 +17,10 @@ O identificador de cada decisão é `STJ-<registro>-<sequencial>`: `registro` é
 ## `sintetico/` (avaliação por contradições sintéticas)
 
 - `bases.csv`: as 400 decisões, com `id`, `url` e `categoria_inserida` (vazia nas 200 que ficaram intactas).
-- `gold.jsonl`: o gabarito, uma decisão por linha. Cada contradição tem a `categoria` e os dois trechos `a` e `b`, cada um com o `segmento` e as posições `inicio` e `fim` (índices de caractere dentro do segmento, depois da inserção). `b` é sempre a frase alterada. A `justificativa` é uma frase-modelo da regra de inserção.
+- `gold.jsonl`: o gabarito, uma decisão por linha. Cada contradição tem a `categoria` e os dois trechos `a` e `b`, cada um com o `segmento` e as posições `inicio` e `fim` (índices de caractere dentro do segmento, depois da inserção). `b` é sempre a frase alterada. Em CDF-1, a ementa também é invertida, mas não entra no gabarito. A `justificativa` é uma frase-modelo da regra de inserção.
 - `splits.json`: as 5 partições, como no tribunal.
 
-Esses arquivos têm o mesmo formato dos que `scripts/preparar_avaliacoes.py` grava em `data/tribunal/` e `data/sintetico/`. Depois de refazer a coleta, eles servem para conferir se as decisões, os rótulos, as partições e as contradições inseridas são as mesmas do artigo.
+`rotulos.json`, `splits.json` e `gold.jsonl` têm o mesmo formato dos que `scripts/preparar_avaliacoes.py` grava em `data/tribunal/` e `data/sintetico/`, e `coleta/criterios.jsonl` é o arquivo que a coleta grava. Os dois CSV foram montados a partir dos metadados das decisões e do gabarito. Depois de refazer a coleta, esses arquivos servem para conferir se as decisões, os rótulos, as partições e as contradições inseridas são as mesmas do artigo.
 
 ## Licença
 
