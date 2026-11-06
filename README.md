@@ -133,7 +133,7 @@ Ver [`ma.md`](docs/resultados/ma.md).
 | Todos os pares entre as proposições | 163.055 | 100% | 175 de 200 |
 | Os mais similares, no mesmo número da MA | 14.021 | 8,6% | 23 de 200 |
 
-As 25 contradições perdidas já se perdem na identificação de proposições, sobretudo nas categorias que dependem de valores, datas e prazos.
+A coluna da direita é a cobertura da seleção, isto é, o máximo que a classificação pode acertar, e não a detecção: das 175 contradições alcançadas, C acertou 168 (a revocação por par de 0,840), e, das 23, B acertou 20 (0,100). As 25 contradições perdidas já se perdem na identificação de proposições, sobretudo nas categorias que dependem de valores, datas e prazos.
 
 ### Segmentação
 
@@ -147,7 +147,7 @@ Das 19 contradições revisadas, 6 foram genuínas, 6 parcialmente válidas e 7 
 
 Depois da revisão, a configuração C foi executada de novo com o [`nli_v2.md`](src/prompts/nli_v2.md), que acrescenta duas regras sobre decisão transcrita e agravo interno ([`scripts/nli_v2.py`](scripts/nli_v2.py)). Como as regras foram escritas depois de ver decisões de teste, essa análise não substitui os resultados acima.
 
-No tribunal, só as 41 decisões que C marcou foram reclassificadas. Supondo que as outras continuem não marcadas e somando todas as decisões de teste, o F1 cairia de 0,355 para 0,250: o v2 retirou as 7 contradições incorretas, mas também 4 das 6 genuínas. Numa amostra de 40 decisões sintéticas, o F1 por decisão foi de 0,905 para 0,947 e o F1 por par, de 0,416 para 0,464 ([`nli_v2_tribunal.md`](docs/resultados/nli_v2_tribunal.md), [`nli_v2_sintetica.md`](docs/resultados/nli_v2_sintetica.md)).
+No tribunal, só as 41 decisões que C marcou foram reclassificadas. Supondo que as outras continuem não marcadas, o F1 cairia de 0,355 para 0,250: o v2 retirou as 7 contradições incorretas, mas também 4 das 6 genuínas. Esses valores agregam as 200 decisões de teste: C marcou 41 e acertou 25, o que dá P = 0,610 e F1 = 0,355. A tabela do tribunal traz a média entre as 5 partições (P = 0,619 e F1 = 0,353), e os valores diferem um pouco porque o número de decisões marcadas varia de uma partição para outra (de 6 a 11). Numa amostra de 40 decisões sintéticas, o F1 por decisão foi de 0,905 para 0,947 e o F1 por par, de 0,416 para 0,464 ([`nli_v2_tribunal.md`](docs/resultados/nli_v2_tribunal.md), [`nli_v2_sintetica.md`](docs/resultados/nli_v2_sintetica.md)).
 
 ### Custo
 
