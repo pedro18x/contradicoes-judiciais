@@ -16,6 +16,8 @@ O trabalho avalia se a combinação de Mineração de Argumentos (MA) e Inferên
 
 A hipótese se confirmou apenas no conjunto sintético e no nível da decisão. As tabelas completas estão em [`docs/resultados/`](docs/resultados/), e as limitações, [mais abaixo](#limitações).
 
+Os modelos de linguagem usados (Claude Haiku 5.5, Claude Sonnet 5.5, mDeBERTa-v3 e paraphrase-multilingual-mpnet) estão listados em [Modelos utilizados](#modelos-utilizados).
+
 ## Como o sistema funciona
 
 O *pipeline* recebe o texto de um acórdão e devolve pares de trechos que se contradizem, com a categoria e uma justificativa.
@@ -39,7 +41,7 @@ Os prompts em [`src/prompts/`](src/prompts/) são exatamente os usados no experi
 
 B e C classificam o mesmo número de pares com o mesmo modelo, o que isola o efeito da seleção. C e D usam os mesmos pares, o que isola o efeito do classificador.
 
-### Modelos
+## Modelos utilizados
 
 | Uso | Modelo |
 |---|---|
